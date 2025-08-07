@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/prettierrc",
   "trailingComma": "es5",
   "useTabs": false,
-  "tabWidth": 2,
+  "tabWidth": 4,
   "printWidth": 80,
   "singleQuote": true,
   "semi": true

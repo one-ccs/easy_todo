@@ -1,25 +1,14 @@
 import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig, ViteDevServer } from 'vite';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import VueRouter from 'unplugin-vue-router/vite';
 
-function myPlugin() {
-  return {
-    name: 'my-plugin',
-    configureServer(server: ViteDevServer) {
-      server.middlewares.use((req, res, next) => {
-        req.url = '/proxy/5173' + req.url;
-
-        next();
-      });
-    },
-  };
-}
+import devServerProxy from './src/plugins/devServerProxy';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [myPlugin(), VueRouter({}), vue()],
+  plugins: [devServerProxy(), VueRouter({}), vue()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

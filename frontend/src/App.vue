@@ -1,7 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useGlobalStore from '@/stores/global';
+import Tabbar from '@/components/Tabbar.vue';
 
-<template>
-  <RouterView />
-</template>
+const globalStore = useGlobalStore();
+</script>
 
-<style scoped></style>
+<template></template>
+
+<style></style>

@@ -1,0 +1,20 @@
+[
+    {
+        "label": "笔记",
+        "name": "note",
+        "icon": "column",
+        "path": "/note"
+    },
+    {
+        "label": "待办",
+        "name": "todo",
+        "icon": "records",
+        "path": "/todo"
+    },
+    {
+        "label": "我的",
+        "name": "user",
+        "icon": "contact",
+        "path": "/user"
+    }
+]
