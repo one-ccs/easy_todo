@@ -1,31 +1,15 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import useGlobalStore from '@/stores/global';
 
+const router = useRouter();
 const globalStore = useGlobalStore();
 
-const todo = {
-    id: 1,
-    title: 'Buy groceries',
-    desc: 'Milk, cheese, bread, apples',
-    list: [
-        {
-            title: 'Grocery List',
-            content: '',
-            tag: '',
-        },
-    ],
-};
+if (router.currentRoute.value.path === '/') {
+    router.replace(globalStore.homePath);
+}
 </script>
 
-<template>
-    <van-config-provider :theme="globalStore.theme">
-        <router-view v-slot="{ Component, route }">
-            <transition name="van-fade" mode="out-in">
-                <component :is="Component"></component>
-            </transition>
-        </router-view>
-        <tabbar />
-    </van-config-provider>
-</template>
+<template></template>
 
 <style lang="less" scoped></style>

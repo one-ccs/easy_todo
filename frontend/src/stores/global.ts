@@ -5,8 +5,12 @@ const useGlobalStore = defineStore('global', {
     state: () => ({
         theme: <ConfigProviderTheme>'dark',
         safeAreaInsetBottom: false,
+        homePath: '/todo',
     }),
-    getters: {},
+    getters: {
+        appVersion: () => __APP_VERSION__,
+        appName: () => __APP_NAME__,
+    },
     actions: {
         toggleTheme() {
             this.theme = this.theme === 'dark' ? 'light' : 'dark';

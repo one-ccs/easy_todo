@@ -11,7 +11,8 @@ import eventEmitter from '@/utils/eventEmitter';
 import 'vant/lib/index.css';
 
 import './assets/css/base.css';
-import './assets/css/dark.css';
+import './assets/css/light.less';
+import './assets/css/dark.less';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -26,5 +27,3 @@ app.mount('#app');
 setInterval(() => {
     eventEmitter.emit('API:UN_AUTH');
 }, 1000);
-
-router.replace('/todo');

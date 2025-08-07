@@ -2,6 +2,10 @@
   "name": "easy-todo",
   "version": "0.0.0",
   "private": true,
+  "author": {
+    "name": "one-ccs",
+    "email": "one-ccs@foxmail.com"
+  },
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

@@ -19,10 +19,10 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
+    '/(nav)/note': RouteRecordInfo<'/(nav)/note', '/note', Record<never, never>, Record<never, never>>,
+    '/(nav)/todo': RouteRecordInfo<'/(nav)/todo', '/todo', Record<never, never>, Record<never, never>>,
+    '/(nav)/user': RouteRecordInfo<'/(nav)/user', '/user', Record<never, never>, Record<never, never>>,
     '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
-    '/note/': RouteRecordInfo<'/note/', '/note', Record<never, never>, Record<never, never>>,
-    '/todo/': RouteRecordInfo<'/todo/', '/todo', Record<never, never>, Record<never, never>>,
-    '/user/': RouteRecordInfo<'/user/', '/user', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -40,20 +40,20 @@ declare module 'vue-router/auto-routes' {
       routes: '/'
       views: never
     }
+    'src/pages/(nav)/note.vue': {
+      routes: '/(nav)/note'
+      views: never
+    }
+    'src/pages/(nav)/todo.vue': {
+      routes: '/(nav)/todo'
+      views: never
+    }
+    'src/pages/(nav)/user.vue': {
+      routes: '/(nav)/user'
+      views: never
+    }
     'src/pages/[...404].vue': {
       routes: '/[...404]'
-      views: never
-    }
-    'src/pages/note/index.vue': {
-      routes: '/note/'
-      views: never
-    }
-    'src/pages/todo/index.vue': {
-      routes: '/todo/'
-      views: never
-    }
-    'src/pages/user/index.vue': {
-      routes: '/user/'
       views: never
     }
   }
