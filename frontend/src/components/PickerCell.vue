@@ -46,6 +46,7 @@ const onConfirm = (data: PickerChange) => {
 
         <van-popup
             v-model:show="pickerShown"
+            teleport="#app"
             position="bottom"
             destroy-on-close
             close-on-popstate
@@ -61,4 +62,4 @@ const onConfirm = (data: PickerChange) => {
     </div>
 </template>
 
-<style lang="less"></style>
+<style lang="less" scoped></style>

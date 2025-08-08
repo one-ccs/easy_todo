@@ -29,6 +29,7 @@ const {
         :duration="duration"
         :position="position"
         close-on-popstate
+        teleport="#app"
     >
         <div class="popup">
             <div class="title-wrapper">
@@ -46,11 +47,14 @@ const {
 .popup {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 
     .title-wrapper {
         display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
         align-items: center;
-        justify-content: left;
         padding: var(--et-nav-bar-padding);
         height: var(--et-nav-bar-height);
 
@@ -59,6 +63,10 @@ const {
             font-weight: bold;
             line-height: 1em;
         }
+    }
+    .container {
+        width: 100%;
+        height: 100%;
     }
 }
 </style>

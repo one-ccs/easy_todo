@@ -6,7 +6,6 @@ import VueRouter from 'unplugin-vue-router/vite';
 
 import devServerProxy from './src/plugins/devServerProxy';
 
-
 // https://vite.dev/config/
 export default defineConfig({
     define: {
@@ -23,7 +22,6 @@ export default defineConfig({
         host: '0.0.0.0',
         port: 5173,
         allowedHosts: ['code.oc-nas.duckdns.org'],
-        ws: true,
     },
     base: '/proxy/5173/',
 });

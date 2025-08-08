@@ -43,4 +43,4 @@ const config = [
     </van-tabbar>
 </template>
 
-<style lang="less"></style>
+<style lang="less" scoped></style>
