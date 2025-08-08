@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import type { Numeric } from 'vant/lib/utils';
 import type { PickerColumn, PickerOption } from 'vant';
+import useGlobalStore from '@/stores/global';
 
 export type PickerChange = {
     selectedValues: Numeric[];
@@ -9,14 +10,15 @@ export type PickerChange = {
     selectedIndexes: number[];
 };
 
+const globalStore = useGlobalStore();
 const pickerValue = defineModel<Numeric[]>();
 const {
     title,
-    size = 'large',
+    label,
     columns,
 } = defineProps<{
     title: string;
-    size?: 'large' | 'normal';
+    label?: string;
     columns: (PickerColumn | PickerOption)[];
 }>();
 const emit = defineEmits<{
@@ -37,8 +39,9 @@ const onConfirm = (data: PickerChange) => {
     <div class="picker-cell">
         <van-cell
             :title="title"
+            :label="label"
             :value="pickerValue?.join()"
-            :size="size"
+            :size="globalStore.cellSize"
             @click="pickerShown = true"
             center
             is-link

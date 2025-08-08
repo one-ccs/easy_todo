@@ -2,9 +2,12 @@
 import { ref, type Component } from 'vue';
 import Popup from '../Popup.vue';
 import PickerCell, { type PickerChange } from '../PickerCell.vue';
+import SwitchCell from '../SwitchCell.vue';
 import About from './Settings/About.vue';
+import useGlobalStore from '@/stores/global';
 import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
+const globalStore = useGlobalStore();
 const settingStore = useSettingStore();
 const popupShown = ref(false);
 const popupTitle = ref('');
@@ -12,7 +15,7 @@ const popupComponents = <{ [key: string]: Component }>{
     关于: About,
 };
 
-const show = (title: string) => {
+const showPopup = (title: string) => {
     popupTitle.value = title;
     popupShown.value = true;
 };
@@ -31,7 +34,12 @@ const onThemeChange = (data: PickerChange) => {
                 :columns="((): any => themes)()"
                 @confirm="onThemeChange"
             />
-            <van-cell title="关于" @click="show('关于')" is-link />
+            <switch-cell v-model="globalStore.safeAreaInsetTop" title="顶部安全区适配" />
+            <switch-cell
+                v-model="globalStore.safeAreaInsetBottom"
+                title="底部安全区适配"
+            />
+            <van-cell title="关于" @click="showPopup('关于')" is-link />
         </van-cell-group>
 
         <popup v-model:shown="popupShown" v-model:title="popupTitle">

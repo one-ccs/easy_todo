@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia';
+import type { CellSize } from 'vant';
 
 const useGlobalStore = defineStore('global', {
     state: () => ({
         safeAreaInsetTop: false,
         safeAreaInsetBottom: false,
         homePath: '/todo',
+        cellSize: <CellSize>'normal',
     }),
     getters: {
         appVersion: () => __APP_VERSION__,

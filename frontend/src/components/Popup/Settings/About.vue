@@ -12,7 +12,9 @@ const globalStore = useGlobalStore();
         </div>
         <div class="app-name">Easy Todo</div>
         <div class="version">版本: v{{ globalStore.appVersion }}</div>
-        <div class="copyright">Copyright ©2025 ONE-CCS 版权所有</div>
+        <div class="footer">
+            <div class="copyright">Copyright ©2025 ONE-CCS 版权所有</div>
+        </div>
     </div>
 </template>
 
@@ -33,12 +35,13 @@ const globalStore = useGlobalStore();
         font-size: 2em;
     }
     .version {
-        opacity: 0.65;
         margin-top: 3px;
+        color: var(--et-sub-color);
     }
-    .copyright {
-        opacity: 0.65;
+    .footer {
         margin: auto auto 2.5em;
+        font-size: 0.75em;
+        color: var(--et-sub-color);
     }
 }
 </style>
