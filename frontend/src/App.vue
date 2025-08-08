@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { type Component } from 'vue';
 import Tabbar from '@/components/Tabbar.vue';
-import NoteNavBar from './components/NavBar/NoteNavBar.vue';
-import TodoNavBar from './components/NavBar/TodoNavBar.vue';
-import UserNavBar from './components/NavBar/UserNavBar.vue';
-import useGlobalStore from '@/stores/global';
+import NoteNavBar from './components/NavBar/Note.vue';
+import TodoNavBar from './components/NavBar/Todo.vue';
+import UserNavBar from './components/NavBar/User.vue';
+import useSettingStore from './stores/setting';
 
-const globalStore = useGlobalStore();
-
+const settingStore = useSettingStore();
 const navbar = <{ [key: string]: Component }>{
     '/note': NoteNavBar,
     '/todo': TodoNavBar,
@@ -16,7 +15,7 @@ const navbar = <{ [key: string]: Component }>{
 </script>
 
 <template>
-    <van-config-provider :theme="globalStore.theme">
+    <van-config-provider :theme="settingStore._theme">
         <router-view v-slot="{ Component, route }">
             <keep-alive>
                 <component :is="navbar[route.path]"></component>

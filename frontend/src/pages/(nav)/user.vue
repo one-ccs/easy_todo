@@ -1,21 +1,29 @@
 <script setup lang="ts">
-import router from '@/router';
-import useGlobalStore from '@/stores/global';
+import { ref, type Component } from 'vue';
+import Popup from '@/components/Popup.vue';
+import SettingsPopup from '@/components/Popup/Settings.vue';
 
-const globalStore = useGlobalStore();
+const popupShown = ref(false);
+const popupTitle = ref('');
+const components = <{ [key: string]: Component }>{
+    设置: SettingsPopup,
+};
+
+const show = (title: string) => {
+    popupTitle.value = title;
+    popupShown.value = true;
+};
 </script>
 
 <template>
     <div class="client-view">
-        <p>{{ globalStore.appName }}</p>
-        <p>{{ globalStore.appVersion }}</p>
+        <van-cell-group inset>
+            <van-cell is-link title="设置" @click="show('设置')" />
+        </van-cell-group>
 
-        <van-button @click="globalStore.toggleTheme()">{{
-            globalStore.theme
-        }}</van-button>
-        <van-button @click="router.push('/user/settings')">设置</van-button>
-
-        <van-popup></van-popup>
+        <popup v-model:shown="popupShown" v-model:title="popupTitle">
+            <component :is="components[popupTitle]"></component>
+        </popup>
     </div>
 </template>
 

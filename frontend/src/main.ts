@@ -6,11 +6,9 @@ import App from './App.vue';
 import router from './router';
 import piniaPersist from './plugins/piniaPersist';
 
-import eventEmitter from '@/utils/eventEmitter';
-
 import 'vant/lib/index.css';
 
-import './assets/css/base.less';
+import './assets/css/main.less';
 import './assets/css/light.less';
 import './assets/css/dark.less';
 
@@ -23,7 +21,3 @@ app.use(pinia);
 app.use(router);
 app.use(Vant);
 app.mount('#app');
-
-setInterval(() => {
-    eventEmitter.emit('API:UN_AUTH');
-}, 1000);

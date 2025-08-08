@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useGlobalStore from '@/stores/global';
+
+const globalStore = useGlobalStore();
+</script>
 
 <template>
-    <van-nav-bar>
+    <van-nav-bar :safe-area-inset-top="globalStore.safeAreaInsetTop" left-disabled>
         <template #left>
             <div class="left">
                 <div class="icon">

@@ -1,0 +1,28 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+:root {
+    --et-nav-bar-padding: 0 var(--van-padding-md);
+    --et-nav-bar-height: var(--van-nav-bar-height);
+    --et-nav-bar-icon-size: 2em;
+    --et-nav-bar-icon-radius: 5px;
+    --et-nav-bar-space: 12px;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--et-nav-bar-icon-size);
+    height: var(--et-nav-bar-icon-size);
+}
