@@ -10,7 +10,7 @@ import eventEmitter from '@/utils/eventEmitter';
 
 import 'vant/lib/index.css';
 
-import './assets/css/base.css';
+import './assets/css/base.less';
 import './assets/css/light.less';
 import './assets/css/dark.less';
 

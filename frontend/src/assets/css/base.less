@@ -1,0 +1,79 @@
+:root {
+    --et-nav-bar-border-radius: 5px;
+    --et-nav-bar-icon-size: 2em;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: var(--et-color);
+    background-color: var(--et-bgc);
+    user-select: none;
+
+    #app {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.van-config-provider {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .van-nav-bar {
+        .left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .icon {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: var(--et-nav-bar-border-radius);
+                width: calc(var(--et-nav-bar-icon-size) + 0.5em);
+                height: calc(var(--et-nav-bar-icon-size) + 0.5em);
+                color: var(--et-reverse-color);
+                background-color: var(--et-reverse-bgc);
+
+                .van-icon {
+                    font-size: var(--et-nav-bar-icon-size);
+                }
+            }
+            .content {
+                padding: 5px 10px;
+                text-align: left;
+                line-height: 1.2em;
+
+                .desc {
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+
+    .client-view {
+        width: 100%;
+        height: 100%;
+    }
+}

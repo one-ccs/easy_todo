@@ -23,6 +23,7 @@ export default defineConfig({
         host: '0.0.0.0',
         port: 5173,
         allowedHosts: ['code.oc-nas.duckdns.org'],
+        ws: true,
     },
     base: '/proxy/5173/',
 });

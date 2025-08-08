@@ -6,7 +6,7 @@ const globalStore = useGlobalStore();
 </script>
 
 <template>
-    <div class="view">
+    <div class="client-view">
         <p>{{ globalStore.appName }}</p>
         <p>{{ globalStore.appVersion }}</p>
 
@@ -14,6 +14,8 @@ const globalStore = useGlobalStore();
             globalStore.theme
         }}</van-button>
         <van-button @click="router.push('/user/settings')">设置</van-button>
+
+        <van-popup></van-popup>
     </div>
 </template>
 

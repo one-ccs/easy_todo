@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 
-const useGlobalStore = defineStore('global', {
+const useTodoStore = defineStore('todo', {
     state: () => ({}),
     getters: {},
     actions: {},
 });
 
-export default useGlobalStore;
+export default useTodoStore;
