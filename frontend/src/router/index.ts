@@ -6,4 +6,18 @@ const router = createRouter({
     routes,
 });
 
+router.beforeEach((to, from) => {
+    const from_parts = from.path.split('/').filter(Boolean);
+
+    if (from_parts.length === 0) {
+        const to_parts = to.path.split('/').filter(Boolean);
+
+        if (to_parts.length > 1) {
+            to_parts.forEach((_, index) => {
+                history.pushState(null, '', '/' + to_parts.slice(0, index + 1).join('/'));
+            });
+        }
+    }
+});
+
 export default router;
