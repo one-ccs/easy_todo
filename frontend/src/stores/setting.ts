@@ -2,34 +2,34 @@ import { defineStore } from 'pinia';
 import type { ConfigProviderTheme } from 'vant';
 
 export const themes = [
-    { text: '浅色', value: 'light' },
-    { text: '深色', value: 'dark' },
-    { text: '跟随系统', value: 'auto' },
+    { index: 0, text: '浅色', value: 'light', icon: 'sun-o' },
+    { index: 1, text: '深色', value: 'dark', icon: 'moon-o' },
+    { index: 2, text: '跟随系统', value: 'auto', icon: 'adjust' },
 ] as const;
 export type Theme = (typeof themes)[number];
 
 const useSettingStore = defineStore('setting', {
     state: () => ({
-        theme: <Theme>{ text: '浅色', value: 'light' },
-        _theme: <ConfigProviderTheme>'light',
+        themeIndex: 0,
+        theme: <ConfigProviderTheme>'light',
     }),
     getters: {},
     actions: {
         setTheme(theme: Theme) {
-            this.theme = theme;
+            this.themeIndex = theme.index;
 
             if (theme.value === 'auto') {
-                this._theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+                this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
                     ? 'dark'
                     : 'light';
 
                 window.matchMedia('(prefers-color-scheme: dark)').onchange = (
                     evt: MediaQueryListEvent
                 ) => {
-                    this._theme = evt.matches ? 'dark' : 'light';
+                    this.theme = evt.matches ? 'dark' : 'light';
                 };
             } else {
-                this._theme = theme.value;
+                this.theme = theme.value;
                 window.matchMedia('(prefers-color-scheme: dark)').onchange = null;
             }
         },

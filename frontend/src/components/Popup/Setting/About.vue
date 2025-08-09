@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import logo from '@/assets/images/logo.svg';
+import logo from '@/assets/image/logo.svg';
 import useGlobalStore from '@/stores/global';
 
 const globalStore = useGlobalStore();
@@ -11,7 +11,7 @@ const globalStore = useGlobalStore();
             <van-icon :name="logo" />
         </div>
         <div class="app-name">Easy Todo</div>
-        <div class="version">版本: v{{ globalStore.appVersion }}</div>
+        <div class="version">v{{ globalStore.appVersion }}</div>
         <div class="footer">
             <div class="copyright">Copyright ©2025 ONE-CCS 版权所有</div>
         </div>

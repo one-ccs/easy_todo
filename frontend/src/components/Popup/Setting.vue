@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, type Component } from 'vue';
 import Popup from '../Popup.vue';
-import PickerCell, { type PickerChange } from '../PickerCell.vue';
+import PickerCell, { type PickerData } from '../PickerCell.vue';
 import SwitchCell from '../SwitchCell.vue';
-import About from './Settings/About.vue';
+import About from './Setting/About.vue';
 import useGlobalStore from '@/stores/global';
 import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
@@ -19,7 +19,7 @@ const showPopup = (title: string) => {
     popupTitle.value = title;
     popupShown.value = true;
 };
-const onThemeChange = (data: PickerChange) => {
+const onThemeChange = (data: PickerData) => {
     settingStore.setTheme(data.selectedOptions[0] as Theme);
 };
 </script>
@@ -29,8 +29,8 @@ const onThemeChange = (data: PickerChange) => {
         <van-cell-group inset>
             <picker-cell
                 title="颜色主题"
-                :model-value="[settingStore.theme]"
-                :value="settingStore.theme.text"
+                :model-value="[themes[settingStore.themeIndex]]"
+                :value="themes[settingStore.themeIndex].text"
                 :columns="((): any => themes)()"
                 @confirm="onThemeChange"
             />
@@ -39,6 +39,9 @@ const onThemeChange = (data: PickerChange) => {
                 v-model="globalStore.safeAreaInsetBottom"
                 title="底部安全区适配"
             />
+        </van-cell-group>
+
+        <van-cell-group inset>
             <van-cell title="关于" @click="showPopup('关于')" is-link />
         </van-cell-group>
 

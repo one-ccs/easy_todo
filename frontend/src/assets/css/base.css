@@ -17,13 +17,9 @@
     --et-nav-bar-icon-size: 2em;
     --et-nav-bar-icon-radius: 5px;
     --et-nav-bar-space: 12px;
+    --et-space: var(--et-nav-bar-space);
     --et-sub-color: #707070;
-}
 
-.nav-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: var(--et-nav-bar-icon-size);
-    height: var(--et-nav-bar-icon-size);
+    --et-color: #616161;
+    --et-bgc: #f5f5f5;
 }

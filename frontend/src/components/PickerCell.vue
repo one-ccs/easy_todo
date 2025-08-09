@@ -4,7 +4,7 @@ import type { Numeric } from 'vant/lib/utils';
 import type { PickerColumn, PickerOption } from 'vant';
 import useGlobalStore from '@/stores/global';
 
-export type PickerChange = {
+export type PickerData = {
     selectedValues: Numeric[];
     selectedOptions: (PickerColumn | PickerOption)[];
     selectedIndexes: number[];
@@ -12,22 +12,18 @@ export type PickerChange = {
 
 const globalStore = useGlobalStore();
 const pickerValue = defineModel<PickerOption[]>();
-const {
-    title,
-    label,
-    columns,
-} = defineProps<{
+const { title, label, columns } = defineProps<{
     title: string;
     label?: string;
     columns: (PickerColumn | PickerOption)[];
 }>();
 const emit = defineEmits<{
-    (e: 'confirm', data: PickerChange): void;
+    confirm: [data: PickerData];
 }>();
 
 const pickerShown = ref(false);
 
-const onConfirm = (data: PickerChange) => {
+const onConfirm = (data: PickerData) => {
     pickerShown.value = false;
     pickerValue.value = data.selectedOptions;
 
@@ -40,7 +36,7 @@ const onConfirm = (data: PickerChange) => {
         <van-cell
             :title="title"
             :label="label"
-            :value="pickerValue?.map(x => x.text).join()"
+            :value="pickerValue?.map((x) => x.text).join()"
             :size="globalStore.cellSize"
             @click="pickerShown = true"
             center
@@ -56,7 +52,9 @@ const onConfirm = (data: PickerChange) => {
             round
         >
             <van-picker
-                :model-value="pickerValue?.filter(x => x.value !== undefined).map(x => x.value!)"
+                :model-value="
+                    pickerValue?.filter((x) => x.value !== undefined).map((x) => x.value!)
+                "
                 :title="title"
                 :columns="columns"
                 @cancel="pickerShown = false"

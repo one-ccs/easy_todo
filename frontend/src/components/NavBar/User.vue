@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import StatusButton, { type ButtonStatus } from '../StatusButton.vue';
 import useGlobalStore from '@/stores/global';
+import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
 const globalStore = useGlobalStore();
+const settingStore = useSettingStore();
+
+const onThemeChange = (data: Theme) => {
+    settingStore.setTheme(data);
+};
 </script>
 
 <template>
@@ -17,7 +24,23 @@ const globalStore = useGlobalStore();
                 </div>
             </div>
         </template>
+        <template #right>
+            <status-button
+                class="theme-button"
+                :model-value="themes[settingStore.themeIndex]"
+                :status-list="themes"
+                @change="onThemeChange"
+                size="small"
+                icon-prefix="fa"
+                hairline
+                round
+            />
+        </template>
     </van-nav-bar>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.theme-button::after {
+    border: unset;
+}
+</style>

@@ -15,7 +15,7 @@ const navbar = <{ [key: string]: Component }>{
 </script>
 
 <template>
-    <van-config-provider :theme="settingStore._theme">
+    <van-config-provider :theme="settingStore.theme">
         <router-view v-slot="{ Component, route }">
             <keep-alive>
                 <component :is="navbar[route.path]"></component>
