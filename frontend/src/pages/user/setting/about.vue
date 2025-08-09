@@ -6,14 +6,18 @@ const globalStore = useGlobalStore();
 </script>
 
 <template>
-    <div class="about">
-        <div class="logo">
-            <van-icon :name="logo" />
-        </div>
-        <div class="app-name">Easy Todo</div>
-        <div class="version">v{{ globalStore.appVersion }}</div>
-        <div class="footer">
-            <div class="copyright">Copyright ©2025 ONE-CCS 版权所有</div>
+    <div class="full-view">
+        <van-nav-bar title="关于" left-arrow @click="$router.back" />
+
+        <div class="about">
+            <div class="logo">
+                <van-icon :name="logo" />
+            </div>
+            <div class="app-name">Easy Todo</div>
+            <div class="version">v{{ globalStore.appVersion }}</div>
+            <div class="footer">
+                <div class="copyright">Copyright ©2025 ONE-CCS 版权所有</div>
+            </div>
         </div>
     </div>
 </template>

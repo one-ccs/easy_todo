@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import StatusButton, { type ButtonStatus } from '../StatusButton.vue';
-import useGlobalStore from '@/stores/global';
+import NavBar from '../NavBar.vue';
+import StatusButton from '../StatusButton.vue';
 import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
-const globalStore = useGlobalStore();
 const settingStore = useSettingStore();
 
 const onThemeChange = (data: Theme) => {
@@ -12,7 +11,7 @@ const onThemeChange = (data: Theme) => {
 </script>
 
 <template>
-    <van-nav-bar :safe-area-inset-top="globalStore.safeAreaInsetTop" left-disabled>
+    <nav-bar left-disabled>
         <template #left>
             <div class="left">
                 <div class="icon">
@@ -36,7 +35,7 @@ const onThemeChange = (data: Theme) => {
                 round
             />
         </template>
-    </van-nav-bar>
+    </nav-bar>
 </template>
 
 <style lang="less" scoped>

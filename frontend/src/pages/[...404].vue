@@ -1,18 +1,12 @@
-<script setup lang="ts">
-import useGlobalStore from '@/stores/global';
-
-const globalStore = useGlobalStore();
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <div class="container">
         <div class="not-found">
             <h1>404</h1>
             <h2>哎呀，页面未找到！</h2>
-            <p>看起来你迷路了，别担心，点击下面的按钮返回首页。</p>
-            <van-button @click="$router.replace(globalStore.homePath)"
-                >返回首页</van-button
-            >
+            <p>看起来你迷路了，别担心，点击下面的按钮返回上一页。</p>
+            <van-button @click="$router.back">返回上一页</van-button>
             <div class="astronaut">
                 <!-- <img src="astronaut.png" alt="宇航员"> -->
             </div>

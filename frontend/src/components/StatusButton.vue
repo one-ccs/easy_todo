@@ -4,7 +4,7 @@ import { watchEffect } from 'vue';
 
 export type ButtonStatus = {
     label?: string;
-    value?: string;
+    value?: any;
     icon?: string;
     [key: PropertyKey]: any;
 };

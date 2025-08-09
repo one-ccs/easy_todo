@@ -7,6 +7,7 @@ const useGlobalStore = defineStore('global', {
         safeAreaInsetBottom: false,
         homePath: '/todo',
         cellSize: <CellSize>'normal',
+        switchSize: '1.5em',
     }),
     getters: {
         appVersion: () => __APP_VERSION__,

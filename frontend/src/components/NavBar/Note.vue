@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import useGlobalStore from '@/stores/global';
-
-const globalStore = useGlobalStore();
+import NavBar from '../NavBar.vue';
 </script>
 
 <template>
-    <van-nav-bar :safe-area-inset-top="globalStore.safeAreaInsetTop">
+    <nav-bar>
         <template #left>
             <div class="left">
                 <div class="icon">
@@ -20,7 +18,7 @@ const globalStore = useGlobalStore();
                 </div>
             </div>
         </template>
-    </van-nav-bar>
+    </nav-bar>
 </template>
 
 <style lang="less" scoped></style>
