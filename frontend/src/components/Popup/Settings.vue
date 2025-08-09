@@ -29,7 +29,7 @@ const onThemeChange = (data: PickerChange) => {
         <van-cell-group inset>
             <picker-cell
                 title="颜色主题"
-                :model-value="[settingStore.theme.text]"
+                :model-value="[settingStore.theme]"
                 :value="settingStore.theme.text"
                 :columns="((): any => themes)()"
                 @confirm="onThemeChange"

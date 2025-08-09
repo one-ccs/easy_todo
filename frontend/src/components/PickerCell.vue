@@ -11,7 +11,7 @@ export type PickerChange = {
 };
 
 const globalStore = useGlobalStore();
-const pickerValue = defineModel<Numeric[]>();
+const pickerValue = defineModel<PickerOption[]>();
 const {
     title,
     label,
@@ -29,7 +29,7 @@ const pickerShown = ref(false);
 
 const onConfirm = (data: PickerChange) => {
     pickerShown.value = false;
-    pickerValue.value = data.selectedValues;
+    pickerValue.value = data.selectedOptions;
 
     emit('confirm', data);
 };
@@ -40,7 +40,7 @@ const onConfirm = (data: PickerChange) => {
         <van-cell
             :title="title"
             :label="label"
-            :value="pickerValue?.join()"
+            :value="pickerValue?.map(x => x.text).join()"
             :size="globalStore.cellSize"
             @click="pickerShown = true"
             center
@@ -53,9 +53,10 @@ const onConfirm = (data: PickerChange) => {
             position="bottom"
             destroy-on-close
             close-on-popstate
+            round
         >
             <van-picker
-                :model-value="pickerValue"
+                :model-value="pickerValue?.filter(x => x.value !== undefined).map(x => x.value!)"
                 :title="title"
                 :columns="columns"
                 @cancel="pickerShown = false"
