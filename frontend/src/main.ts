@@ -6,6 +6,7 @@ import '@vant/touch-emulator'; /* 桌面鼠标事件端适配 */
 import App from './App.vue';
 import router from './router';
 import piniaPersist from './plugins/piniaPersist';
+import useSettingStore from './stores/setting';
 
 import 'vant/lib/index.css';
 import './assets/css/main.less';
@@ -40,3 +41,12 @@ setNotifyDefaultOptions({
     position: 'top',
     duration: 2000,
 });
+
+window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (evt: MediaQueryListEvent) => {
+        const settingStore = useSettingStore();
+
+        settingStore.themeIndex === 2 &&
+            settingStore.changeTheme(evt.matches ? 'dark' : 'light');
+    });

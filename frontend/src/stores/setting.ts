@@ -15,22 +15,48 @@ const useSettingStore = defineStore('setting', {
     }),
     getters: {},
     actions: {
+        changeTheme(theme: ConfigProviderTheme) {
+            if (typeof window == 'undefined' || !('startViewTransition' in document)) {
+                this.theme = theme;
+                return;
+            }
+
+            document
+                .startViewTransition(() => {
+                    this.theme = theme;
+                })
+                .ready.then(() => {
+                    const originX =
+                        (window.visualViewport?.width || window.innerWidth) / 2;
+                    const originY =
+                        (window.visualViewport?.height || window.innerHeight) / 2;
+                    const radius = Math.hypot(
+                        Math.max(originX, window.innerWidth - originX),
+                        Math.max(originY, window.innerHeight - originY)
+                    );
+                    const clipPath = [
+                        `circle(0px at ${originX}px ${originY}px)`,
+                        `circle(${radius}px at ${originX}px ${originY}px)`,
+                    ];
+                    const isDark = this.theme === 'dark';
+
+                    document.documentElement.animate(
+                        { clipPath: isDark ? clipPath.reverse() : clipPath },
+                        {
+                            duration: 380,
+                            easing: 'ease-in',
+                            pseudoElement: isDark
+                                ? '::view-transition-old(root)'
+                                : '::view-transition-new(root)',
+                        }
+                    );
+                });
+        },
         setTheme(theme: Theme) {
             this.themeIndex = theme.index;
 
-            if (theme.value === 'auto') {
-                this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-                    ? 'dark'
-                    : 'light';
-
-                window.matchMedia('(prefers-color-scheme: dark)').onchange = (
-                    evt: MediaQueryListEvent
-                ) => {
-                    this.theme = evt.matches ? 'dark' : 'light';
-                };
-            } else {
-                this.theme = theme.value;
-                window.matchMedia('(prefers-color-scheme: dark)').onchange = null;
+            if (theme.value !== 'auto') {
+                this.changeTheme(theme.value);
             }
         },
     },

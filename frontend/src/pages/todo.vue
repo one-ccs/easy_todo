@@ -66,7 +66,6 @@ const doneList = list.filter((x) => x.status === true);
     }
 
     .van-button {
-        display: inline-block;
         height: 100%;
     }
 }
