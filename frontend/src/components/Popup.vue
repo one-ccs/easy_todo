@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import useGlobalStore from '@/stores/global';
-
 const globalStore = useGlobalStore();
 const shown = defineModel('shown', { default: false, required: true });
 const title = defineModel('title', { default: '' });

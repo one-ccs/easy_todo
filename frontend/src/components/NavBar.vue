@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { type NavBarProps } from 'vant';
-import useGlobalStore from '@/stores/global';
 
 const globalStore = useGlobalStore();
 const props = defineProps<Partial<NavBarProps>>();

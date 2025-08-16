@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia';
 import type { ConfigProviderTheme } from 'vant';
 
 export const themes = [
@@ -8,7 +7,7 @@ export const themes = [
 ] as const;
 export type Theme = (typeof themes)[number];
 
-const useSettingStore = defineStore('setting', {
+export const useSettingStore = defineStore('setting', {
     state: () => ({
         themeIndex: 0,
         theme: <ConfigProviderTheme>'light',
@@ -61,5 +60,3 @@ const useSettingStore = defineStore('setting', {
         },
     },
 });
-
-export default useSettingStore;

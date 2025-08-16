@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import VueRouter from 'unplugin-vue-router/vite';
-import vueDevTools from 'vite-plugin-vue-devtools';
+import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,7 +11,16 @@ export default defineConfig({
         __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
         __APP_NAME__: JSON.stringify(process.env.npm_package_name),
     },
-    plugins: [VueRouter(), vue(), vueDevTools()],
+    plugins: [
+        VueRouter(),
+        vue(),
+        AutoImport({
+            imports: ['vue', 'vue-router', 'pinia'],
+            dirs: ['./src/stores'],
+            dts: './src/auto-imports.d.ts',
+            vueTemplate: true,
+        }),
+    ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),

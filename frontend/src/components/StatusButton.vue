@@ -1,6 +1,5 @@
 <script setup lang="ts" generic="T extends ButtonStatus">
 import { useLoops } from '@/utils/use';
-import { watchEffect } from 'vue';
 
 export type ButtonStatus = {
     label?: string;

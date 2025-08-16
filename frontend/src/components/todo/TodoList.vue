@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import useGlobalStore from '@/stores/global';
-
 export type Todo = {
     title: string;
     text?: string;

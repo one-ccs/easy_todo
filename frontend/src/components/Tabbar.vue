@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import useGlobalStore from '@/stores/global';
-import { ref } from 'vue';
-
 const globalStore = useGlobalStore();
 const active = ref('todo');
 const config = [

@@ -1,7 +1,6 @@
-import { defineStore } from 'pinia';
 import type { CellSize, ConfigProviderThemeVars } from 'vant';
 
-const useGlobalStore = defineStore('global', {
+export const useGlobalStore = defineStore('global', {
     state: () => ({
         safeAreaInsetTop: false,
         safeAreaInsetBottom: false,
@@ -18,5 +17,3 @@ const useGlobalStore = defineStore('global', {
     },
     actions: {},
 });
-
-export default useGlobalStore;

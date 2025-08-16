@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import logo from '@/assets/images/logo.svg';
-import useGlobalStore from '@/stores/global';
 
 const globalStore = useGlobalStore();
 </script>

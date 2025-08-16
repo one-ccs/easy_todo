@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import useGlobalStore from '@/stores/global';
 import type { CellSize } from 'vant';
 
 const globalStore = useGlobalStore();

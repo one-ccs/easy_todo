@@ -1,12 +1,9 @@
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
 import Vant, { setNotifyDefaultOptions, showNotify } from 'vant';
 import '@vant/touch-emulator'; /* 桌面鼠标事件端适配 */
 
 import App from './App.vue';
 import router from './router';
 import piniaPersist from './plugins/piniaPersist';
-import useSettingStore from './stores/setting';
 
 import 'vant/lib/index.css';
 import './assets/css/main.less';

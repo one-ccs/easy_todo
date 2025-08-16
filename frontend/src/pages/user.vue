@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import SlideRouterView from '@/components/SlideRouterView.vue';
-import useGlobalStore from '@/stores/global';
 
 const globalStore = useGlobalStore();
 

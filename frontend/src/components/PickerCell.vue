@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import type { Numeric } from 'vant/lib/utils';
 import type { PickerColumn, PickerOption } from 'vant';
-import useGlobalStore from '@/stores/global';
 
 export type PickerData = {
     selectedValues: Numeric[];

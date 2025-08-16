@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import NavBar from '../NavBar.vue';
 import StatusButton from '../StatusButton.vue';
-import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
 const settingStore = useSettingStore();
 const themeIndex = computed(() => {

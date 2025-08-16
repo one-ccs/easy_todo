@@ -2,8 +2,6 @@
 import SlideRouterView from '@/components/SlideRouterView.vue';
 import PickerCell, { type PickerData } from '@/components/PickerCell.vue';
 import SwitchCell from '@/components/SwitchCell.vue';
-import useGlobalStore from '@/stores/global';
-import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
 const globalStore = useGlobalStore();
 const settingStore = useSettingStore();
