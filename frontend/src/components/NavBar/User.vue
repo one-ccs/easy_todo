@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import NavBar from '../NavBar.vue';
 import StatusButton from '../StatusButton.vue';
 import useSettingStore, { themes, type Theme } from '@/stores/setting';
 
 const settingStore = useSettingStore();
+const themeIndex = computed(() => {
+    return settingStore.theme == 'light' ? themes[0] : themes[1];
+});
 
 const onThemeChange = (data: Theme) => {
     settingStore.setTheme(data);
@@ -26,8 +30,8 @@ const onThemeChange = (data: Theme) => {
         <template #right>
             <status-button
                 class="theme-button"
-                :model-value="themes[settingStore.themeIndex]"
-                :status-list="themes"
+                :model-value="themeIndex"
+                :status-list="themes.slice(0, 2)"
                 @change="onThemeChange"
                 size="small"
                 icon-prefix="fa"
