@@ -3,7 +3,7 @@ import NavBar from '../NavBar.vue';
 </script>
 
 <template>
-    <nav-bar >
+    <nav-bar>
         <template #left>
             <div class="left">
                 <div class="icon">
@@ -15,7 +15,31 @@ import NavBar from '../NavBar.vue';
                 </div>
             </div>
         </template>
+        <template #right>
+            <div class="right">
+                <van-button
+                    @click="$router.push('/todo/search')"
+                    class="nav-button"
+                    icon="search"
+                    hairline
+                    round
+                />
+                <van-button @click="" class="nav-button" icon="plus" hairline round />
+            </div>
+        </template>
     </nav-bar>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.right {
+    .nav-button {
+        &::after {
+            border: unset;
+        }
+
+        :deep(.van-icon) {
+            color: currentColor;
+        }
+    }
+}
+</style>

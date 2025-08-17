@@ -1,4 +1,4 @@
-import Vant, { setNotifyDefaultOptions, showNotify } from 'vant';
+import Vant, { setNotifyDefaultOptions, showConfirmDialog } from 'vant';
 import '@vant/touch-emulator'; /* 桌面鼠标事件端适配 */
 
 import App from './App.vue';
@@ -14,23 +14,18 @@ const pinia = createPinia();
 app.config.errorHandler = (err, instance, info) => {
     console.error(err, instance, info);
 
-    if (!!localStorage.key(0)) {
-        showNotify({
-            type: 'danger',
-            message: '检测到程序错误，尝试清除本地数据并刷新页面！',
-            color: '#ad0000',
-            background: '#ffe1e1',
-        });
-        setTimeout(() => {
-            localStorage.clear();
-            window.location.reload();
-        }, 1000);
-    } else {
-        showNotify({
-            type: 'danger',
-            message: '遇到无法恢复的错误，请联系管理员！',
-        });
-    }
+    showConfirmDialog({
+        title: '错误',
+        message: `程序遇到错误：<p style="color: #ad0000;">"${(err as Error).message}"</p>是否需要重启？`,
+        messageAlign: 'left',
+        allowHtml: true,
+        confirmButtonText: '重启',
+        cancelButtonText: '退出',
+    }).then(() => {
+        window.location.reload();
+    }).catch(() => {
+        console.log('退出程序');
+    });
 };
 
 pinia.use(piniaPersist);

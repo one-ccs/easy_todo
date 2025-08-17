@@ -1,22 +1,14 @@
 <script setup lang="ts">
-import eventEmitter, { EventNames } from '@/utils/eventEmitter';
-import type { SubscriptionCallbackMutation, StateTree } from 'pinia';
-
 const globalStore = useGlobalStore();
 const todoStore = useTodoStore();
-
-eventEmitter.withAlive(EventNames.PINIA_CHANGE, ({ mutation, state }: { mutation: SubscriptionCallbackMutation<StateTree>, state: StateTree }) => {
-    console.log('pinia change', mutation, state);
-
-});
 </script>
 
 <template>
-    <transition-group name="list" tag="div" class="todo-list">
+    <transition-group name="list" tag="div" class="done-list">
         <van-cell-group
-            v-for="todo in todoStore.todoList"
+            v-for="todo in todoStore.doneList"
             :key="todo.id"
-            class="todo"
+            class="done"
             inset
         >
             <van-swipe-cell>
@@ -32,6 +24,7 @@ eventEmitter.withAlive(EventNames.PINIA_CHANGE, ({ mutation, state }: { mutation
                                 rows="1"
                                 autosize
                                 autocomplete="off"
+                                readonly
                             />
                         </template>
                     </van-cell>
@@ -50,6 +43,8 @@ eventEmitter.withAlive(EventNames.PINIA_CHANGE, ({ mutation, state }: { mutation
 
 <style lang="less" scoped>
 :deep(.van-swipe-cell) {
+    filter: grayscale(100%) invert(20%) opacity(0.5);
+
     .van-swipe-cell__left,
     .van-swipe-cell__right {
         background-color: #e6e6e6;
@@ -62,6 +57,9 @@ eventEmitter.withAlive(EventNames.PINIA_CHANGE, ({ mutation, state }: { mutation
 
             .van-icon {
                 border-width: 3px;
+            }
+            .van-icon-success:before {
+                transform: translateY(-0.1em);
             }
         }
         .van-cell__title {

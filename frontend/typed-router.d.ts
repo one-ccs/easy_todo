@@ -20,8 +20,10 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
-    '/note': RouteRecordInfo<'/note', '/note', Record<never, never>, Record<never, never>>,
-    '/todo': RouteRecordInfo<'/todo', '/todo', Record<never, never>, Record<never, never>>,
+    '/note': RouteRecordInfo<'/note', '/note', Record<never, never>, Record<never, never>, '/note/search'>,
+    '/note/search': RouteRecordInfo<'/note/search', '/note/search', Record<never, never>, Record<never, never>>,
+    '/todo': RouteRecordInfo<'/todo', '/todo', Record<never, never>, Record<never, never>, '/todo/search'>,
+    '/todo/search': RouteRecordInfo<'/todo/search', '/todo/search', Record<never, never>, Record<never, never>>,
     '/user': RouteRecordInfo<'/user', '/user', Record<never, never>, Record<never, never>, '/user/setting' | '/user/setting/about'>,
     '/user/setting': RouteRecordInfo<'/user/setting', '/user/setting', Record<never, never>, Record<never, never>, '/user/setting/about'>,
     '/user/setting/about': RouteRecordInfo<'/user/setting/about', '/user/setting/about', Record<never, never>, Record<never, never>>,
@@ -47,11 +49,19 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/note.vue': {
-      routes: '/note'
+      routes: '/note' | '/note/search'
+      views: 'default'
+    }
+    'src/pages/note/search.vue': {
+      routes: '/note/search'
       views: never
     }
     'src/pages/todo.vue': {
-      routes: '/todo'
+      routes: '/todo' | '/todo/search'
+      views: 'default'
+    }
+    'src/pages/todo/search.vue': {
+      routes: '/todo/search'
       views: never
     }
     'src/pages/user.vue': {

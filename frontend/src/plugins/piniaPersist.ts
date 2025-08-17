@@ -1,4 +1,11 @@
-import type { PiniaPluginContext, StateTree } from 'pinia';
+import type { PiniaPluginContext, StateTree, SubscriptionCallbackMutation } from 'pinia';
+
+import eventEmitter, { EventNames } from '@/utils/eventEmitter';
+
+export type PiniaChange = {
+    mutation: SubscriptionCallbackMutation<StateTree>;
+    state: StateTree;
+};
 
 const KEY_PREFIX = 'PINIA:STATE';
 
@@ -25,6 +32,8 @@ const piniaPersist = (context: PiniaPluginContext) => {
     }
 
     store.$subscribe((mutation, state) => {
+        eventEmitter.emit(EventNames.PINIA_CHANGE, { mutation, state });
+
         saveState(key, state);
     });
 };

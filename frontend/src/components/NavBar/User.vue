@@ -26,22 +26,25 @@ const onThemeChange = (data: Theme) => {
             </div>
         </template>
         <template #right>
-            <status-button
-                class="theme-button"
-                :model-value="themeIndex"
-                :status-list="themes.slice(0, 2)"
-                @change="onThemeChange"
-                size="small"
-                icon-prefix="fa"
-                hairline
-                round
-            />
+            <div class="right">
+                <status-button
+                    class="nav-button"
+                    :model-value="themeIndex"
+                    :status-list="themes.slice(0, 2)"
+                    @change="onThemeChange"
+                    icon-prefix="fa"
+                    hairline
+                    round
+                />
+            </div>
         </template>
     </nav-bar>
 </template>
 
 <style lang="less" scoped>
-.theme-button::after {
-    border: unset;
+.right {
+    .nav-button::after {
+        border: unset;
+    }
 }
 </style>

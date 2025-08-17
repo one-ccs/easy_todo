@@ -1,12 +1,14 @@
 import { onUnmounted, onDeactivated } from 'vue';
 import { onMountedOrActivated } from './onMountedOrActivated';
 
-const eventNames = ['API:UN_AUTH', 'API:INVALID'];
-
-type EventNames = (typeof eventNames)[number];
+export const enum EventNames {
+    PINIA_CHANGE = 'PINIA:CHANGE',
+    API_UN_AUTH = 'API:UN_AUTH',
+    API_INVALID = 'API:INVALID',
+}
 
 class EventEmitter {
-    private listeners: Record<EventNames, Set<Function>> = {};
+    private listeners: Record<EventNames[number], Set<Function>> = {};
 
     /**
      * 注册事件

@@ -1,16 +1,18 @@
 import type { Plugin } from 'vite';
 
-const devServerProxy = (): Plugin => {
+export type DevServerProxyOPtions = {
+    baseUrl?: string;
+};
+
+const devServerProxy = ({ baseUrl = '/' }: DevServerProxyOPtions): Plugin => {
     return {
         name: 'dev-server-proxy',
         configureServer(server) {
-            if (process.env.NODE_ENV === 'development') {
-                server.middlewares.use((req, res, next) => {
-                    req.url = '/proxy/5173' + req.url;
+            server.middlewares.use((req, res, next) => {
+                req.url = baseUrl + req.url;
 
-                    next();
-                });
-            }
+                next();
+            });
         },
     };
 };
