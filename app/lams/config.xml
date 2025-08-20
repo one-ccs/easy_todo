@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.one_ccs.easy_todo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Easy todo</name>
+    <description>轻松待办</description>
+    <author email="one-ccs@foxmail.com" href="https://blog.one-ccs.duckdns.org">one-ccs</author>
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+
+    <platform name="android">
+        <content src="/" />
+
+        <icon src="res/android/logo.png" density="ldpi" />
+        <icon src="res/android/logo.png" density="mdpi" />
+        <icon src="res/android/logo.png" density="hdpi" />
+        <icon src="res/android/logo.png" density="xhdpi" />
+        <icon src="res/android/logo.png" density="xxhdpi" />
+        <icon src="res/android/logo.png" density="xxxhdpi" />
+
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-ldpi" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-mdpi" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-hdpi" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-xhdpi" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-xxhdpi" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-xxxhdpi" />
+
+        <preference name="StatusBarOverlaysWebView" value="false" />
+
+        <preference name="SplashScreenDelay" value="2000" />
+        <preference name="SplashMaintainAspectRatio" value="false" />
+    </platform>
+</widget>

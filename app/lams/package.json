@@ -1,0 +1,25 @@
+{
+  "name": "com.one_ccs.easy_todo",
+  "displayName": "Easy Todo",
+  "version": "1.0.0",
+  "description": "轻松待办",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "one-ccs",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^13.0.0",
+    "cordova-plugin-statusbar": "^4.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-statusbar": {}
+    }
+  }
+}
