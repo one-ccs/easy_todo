@@ -20,12 +20,14 @@ app.config.errorHandler = (err, instance, info) => {
         messageAlign: 'left',
         allowHtml: true,
         confirmButtonText: '重启',
-        cancelButtonText: '退出',
-    }).then(() => {
-        window.location.reload();
-    }).catch(() => {
-        console.log('退出程序');
-    });
+        cancelButtonText: '取消',
+    })
+        .then(() => {
+            window.location.reload();
+        })
+        .catch(() => {
+            console.log('取消');
+        });
 };
 
 pinia.use(piniaPersist);

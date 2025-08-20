@@ -15,11 +15,20 @@ const todoStore = useTodoStore();
                 <template #default>
                     <van-cell :size="globalStore.cellSize" center>
                         <template #icon>
-                            <van-checkbox v-model="todo.state" />
+                            <van-checkbox
+                                :model-value="todo.state"
+                                @update:model-value="
+                                    ($event) =>
+                                        todoStore.updateTodo(todo, 'state', $event)
+                                "
+                            />
                         </template>
                         <template #title>
                             <van-field
-                                v-model="todo.text"
+                                :model-value="todo.text"
+                                @update:model-value="
+                                    ($event) => todoStore.updateTodo(todo, 'text', $event)
+                                "
                                 type="textarea"
                                 rows="1"
                                 autosize

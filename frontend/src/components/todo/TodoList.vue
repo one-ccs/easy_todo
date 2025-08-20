@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import eventEmitter, { EventNames } from '@/utils/eventEmitter';
-import type { SubscriptionCallbackMutation, StateTree } from 'pinia';
+import type { Todo } from '@/stores/todo';
 
 const globalStore = useGlobalStore();
 const todoStore = useTodoStore();
-
-eventEmitter.withAlive(EventNames.PINIA_CHANGE, ({ mutation, state }: { mutation: SubscriptionCallbackMutation<StateTree>, state: StateTree }) => {
-    console.log('pinia change', mutation, state);
-
-});
 </script>
 
 <template>
@@ -23,11 +17,20 @@ eventEmitter.withAlive(EventNames.PINIA_CHANGE, ({ mutation, state }: { mutation
                 <template #default>
                     <van-cell :size="globalStore.cellSize" center>
                         <template #icon>
-                            <van-checkbox v-model="todo.state" />
+                            <van-checkbox
+                                :model-value="todo.state"
+                                @update:model-value="
+                                    ($event) =>
+                                        todoStore.updateTodo(todo, 'state', $event)
+                                "
+                            />
                         </template>
                         <template #title>
                             <van-field
-                                v-model="todo.text"
+                                :model-value="todo.text"
+                                @update:model-value="
+                                    ($event) => todoStore.updateTodo(todo, 'text', $event)
+                                "
                                 type="textarea"
                                 rows="1"
                                 autosize

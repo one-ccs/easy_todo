@@ -35,6 +35,7 @@ const config = [
             :name="item.name"
             :icon="item.icon"
             :to="item.path"
+            replace
             >{{ item.label }}</van-tabbar-item
         >
     </van-tabbar>
