@@ -5,7 +5,12 @@ const searchValue = ref('');
 <template>
     <div class="full-view">
         <div class="search-container">
-            <van-search v-model="searchValue" placeholder="搜索" autocomplete="off" autofocus />
+            <van-search
+                v-model="searchValue"
+                placeholder="搜索"
+                autocomplete="off"
+                autofocus
+            />
             <van-button @click="$router.back()" type="default" plain hairline
                 >取消</van-button
             >
@@ -34,13 +39,17 @@ const searchValue = ref('');
             height: 3.8px;
             background-color: var(--et-border-color);
         }
+
         .van-search__content {
             background: transparent;
         }
     }
+
     .van-button {
         flex: 0 0 auto;
         height: 100%;
+        color: var(--et-color);
+        background: transparent;
 
         &::after {
             border: unset;

@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import SlideRouterView from '@/components/SlideRouterView.vue';
-import TodoList from '@/components/todo/TodoList.vue';
-import DoneList from '@/components/todo/DoneList.vue';
+import CreateBox from '@/components/todo/CreateBox.vue';
+import Group from '@/components/todo/Group.vue';
 </script>
 
 <template>
     <div class="client-view">
         <slide-router-view direction="down" :duration="350" />
 
-        <todo-list />
+        <create-box />
 
-        <div class="van-hairline--top"></div>
-
-        <done-list />
+        <group />
     </div>
 </template>
 
@@ -20,14 +18,5 @@ import DoneList from '@/components/todo/DoneList.vue';
 .client-view {
     overflow-x: hidden;
     overflow-y: auto;
-
-    .van-hairline--top {
-        margin: 0 var(--et-space);
-        height: 1px;
-
-        &::after {
-            border-color: var(--et-border-color);
-        }
-    }
 }
 </style>

@@ -95,7 +95,7 @@ declare global {
   export type { Theme } from './stores/setting'
   import('./stores/setting')
   // @ts-ignore
-  export type { Todo, TodoGroup } from './stores/todo'
+  export type { Todo, TodoGroup, TodoGroups } from './stores/todo'
   import('./stores/todo')
 }
 

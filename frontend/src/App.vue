@@ -35,7 +35,26 @@ const getNavBar = (path: string): Component => {
             </keep-alive>
             <tabbar />
         </router-view>
+
+        <van-overlay
+            @click="globalStore.overlay.loading.show = false"
+            v-bind="globalStore.overlay.loading"
+        >
+            <div class="overlay-wrapper">
+                <van-loading vertical>{{ globalStore.overlay.loading.text }}</van-loading>
+            </div>
+        </van-overlay>
     </van-config-provider>
 </template>
 
-<style></style>
+<style lang="less" scoped>
+:deep(.van-overlay) {
+    display: flex;
+    color: v-bind('globalStore.overlay.loading.color');
+    background: v-bind('globalStore.overlay.loading.background');
+
+    .overlay-wrapper {
+        margin: auto;
+    }
+}
+</style>

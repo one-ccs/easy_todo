@@ -3,12 +3,19 @@ import type { Todo } from '@/stores/todo';
 
 const globalStore = useGlobalStore();
 const todoStore = useTodoStore();
+
+const onCheckBoxClick = (todo: Todo) => {
+    todoStore.removeTodo(todo);
+    setTimeout(() => {
+        todoStore.addDone(todo);
+    }, 500);
+};
 </script>
 
 <template>
     <transition-group name="list" tag="div" class="todo-list">
         <van-cell-group
-            v-for="todo in todoStore.todoList"
+            v-for="todo in todoStore.currentGroup.todoList"
             :key="todo.id"
             class="todo"
             inset
@@ -17,20 +24,17 @@ const todoStore = useTodoStore();
                 <template #default>
                     <van-cell :size="globalStore.cellSize" center>
                         <template #icon>
-                            <van-checkbox
-                                :model-value="todo.state"
-                                @update:model-value="
-                                    ($event) =>
-                                        todoStore.updateTodo(todo, 'state', $event)
-                                "
+                            <van-icon
+                                class="van-haptics-feedback"
+                                class-prefix="fa"
+                                name="circle-o"
+                                size="1.2em"
+                                @click="onCheckBoxClick(todo)"
                             />
                         </template>
                         <template #title>
                             <van-field
-                                :model-value="todo.text"
-                                @update:model-value="
-                                    ($event) => todoStore.updateTodo(todo, 'text', $event)
-                                "
+                                v-model="todo.text"
                                 type="textarea"
                                 rows="1"
                                 autosize
@@ -43,8 +47,14 @@ const todoStore = useTodoStore();
                     <van-button square plain type="primary" text="选择" />
                 </template>
                 <template #right>
-                    <van-button square plain type="danger" text="删除" />
                     <van-button square plain type="primary" text="收藏" />
+                    <van-button
+                        square
+                        plain
+                        type="danger"
+                        text="删除"
+                        @click="todoStore.removeTodo(todo)"
+                    />
                 </template>
             </van-swipe-cell>
         </van-cell-group>
@@ -59,14 +69,6 @@ const todoStore = useTodoStore();
     }
 
     .van-cell {
-        .van-checkbox {
-            flex: 0 0 auto;
-            margin-right: var(--et-space);
-
-            .van-icon {
-                border-width: 3px;
-            }
-        }
         .van-cell__title {
             flex: 1 1 auto;
             overflow: hidden;

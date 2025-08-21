@@ -26,12 +26,6 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
     },
-    server: {
-        host: '0.0.0.0',
-        port: 5173,
-        allowedHosts: ['code.oc-nas.duckdns.org', 'test.oc-nas.duckdns.org'],
-    },
-    base: '/',
     build: {
         sourcemap: false, // 取消生成 sourcemap 可以防止在浏览器“源代码”目录树中暴露项目结构
         outDir: 'dist', // 输出目录
