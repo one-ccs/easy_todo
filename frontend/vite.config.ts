@@ -28,7 +28,8 @@ export default defineConfig({
     },
     build: {
         sourcemap: false, // 取消生成 sourcemap 可以防止在浏览器“源代码”目录树中暴露项目结构
-        outDir: 'dist', // 输出目录
+        outDir: '../app/lams/www', // 输出目录
+        emptyOutDir: true, // 清空输出目录
         chunkSizeWarningLimit: 800, // 包大小警告
         reportCompressedSize: false, // 禁用 gzip 压缩大小报告
         minify: 'esbuild', // 指定混淆器

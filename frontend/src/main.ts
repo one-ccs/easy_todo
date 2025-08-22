@@ -8,6 +8,8 @@ import piniaPersist from './plugins/piniaPersist';
 import 'vant/lib/index.css';
 import './assets/css/main.less';
 
+localStorage.setItem('EASY_TODO:VERSION', __APP_VERSION__);
+
 const app = createApp(App);
 const pinia = createPinia();
 

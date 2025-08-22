@@ -3,3 +3,14 @@
 
 declare const __APP_VERSION__: string;
 declare const __APP_NAME__: string;
+
+interface Cordova {
+    file: {
+        applicationDirectory: string;
+        applicationStorageDirectory: string;
+        dataDirectory: string;
+        cacheDirectory: string;
+    };
+}
+
+declare const cordova: Cordova | undefined;
