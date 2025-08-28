@@ -8,13 +8,11 @@ import piniaPersist from './plugins/piniaPersist';
 import 'vant/lib/index.css';
 import './assets/css/main.less';
 
-localStorage.setItem('EASY_TODO:VERSION', __APP_VERSION__);
-
 const app = createApp(App);
 const pinia = createPinia();
 
 app.config.errorHandler = (err, instance, info) => {
-    console.error(err, instance, info);
+    console.error('[Vue ERROR]', err, instance, info);
 
     showConfirmDialog({
         title: '错误',
@@ -45,11 +43,45 @@ setNotifyDefaultOptions({
     duration: 2000,
 });
 
+const globalStore = useGlobalStore();
 const settingStore = useSettingStore();
 
+// 检查更新
+globalStore
+    .checkUpdate()
+    .then(globalStore.downloadUpdate)
+    .then(globalStore.doUpdate)
+    .catch(console.error);
+
+// 监听系统主题切换
 window
     .matchMedia('(prefers-color-scheme: dark)')
     .addEventListener('change', (evt: MediaQueryListEvent) => {
         settingStore.themeIndex === 2 &&
             settingStore.changeTheme(evt.matches ? 'dark' : 'light');
     });
+
+// 监听页面可见性
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        globalStore.visibilityLog.unshift(`[隐藏] ${new Date().toLocaleString()}`);
+    } else {
+        globalStore.visibilityLog.unshift(`[显示] ${new Date().toLocaleString()}`);
+    }
+    if (globalStore.visibilityLog.length > 256) {
+        globalStore.visibilityLog.pop();
+    }
+    if (globalStore.visibilityLog.length && globalStore.visibilityLog.length % 16 === 0) {
+        report();
+    }
+});
+
+function report(): void {
+    fetch('https://apihub.one-ccs.duckdns.org/app/easy_todo/log', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(globalStore.visibilityLog),
+    });
+}

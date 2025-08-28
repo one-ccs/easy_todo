@@ -16,26 +16,27 @@ function error(...args) {
     const indexHTML = path.join(__dirname, '../www/index.html');
     const modifyData = /* html */ `
         <!-- before-build start -->
-        <script src="cordova.js"></script>
+        <script src="https://localhost/cordova.js"></script>
         <!-- before-build end -->
     `;
+    let modifiedData = '';
 
-    fs.readFile(indexHTML, 'utf8', function (err, data) {
-        if (err) {
-            return error(err);
-        }
+    try {
+        const indexHTMLContent = fs.readFileSync(indexHTML, { encoding: 'utf8' });
 
-        var modifiedData = data
+        modifiedData = indexHTMLContent
             .replace(/<!-- before-build start -->[\s\S]+<!-- before-build end -->\s+/, '')
             .replace('</title>', '</title>' + modifyData);
+    } catch (err) {
+        return error(err);
+    }
 
-        fs.writeFile(indexHTML, modifiedData, 'utf8', function (err) {
-            if (err) {
-                return error(err);
-            }
-            log('修改成功');
-        });
-    });
+    try {
+        fs.writeFileSync(indexHTML, modifiedData, { encoding: 'utf8' });
+        log('修改成功');
+    } catch (err) {
+        return error(err);
+    }
 })();
 
 (function copyEntry() {

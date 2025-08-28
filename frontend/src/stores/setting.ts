@@ -11,6 +11,9 @@ export const useSettingStore = defineStore('setting', {
     state: () => ({
         themeIndex: 0,
         theme: <ConfigProviderTheme>'light',
+        safeNavBarInsetTop: false,
+        safeAreaInsetTop: false,
+        safeAreaInsetBottom: false,
     }),
     getters: {},
     actions: {

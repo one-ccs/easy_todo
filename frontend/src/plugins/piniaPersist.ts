@@ -26,6 +26,8 @@ const piniaPersist = (context: PiniaPluginContext) => {
     const { store } = context;
     const key = `${KEY_PREFIX}:${store.$id}`;
 
+    if (!!store.__unstorage) return;
+
     const state = loadState(key);
     if (state) {
         store.$patch(state);

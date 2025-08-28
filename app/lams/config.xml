@@ -4,24 +4,29 @@
     <description>轻松待办</description>
     <author email="one-ccs@foxmail.com" href="https://one-ccs.duckdns.org">one-ccs</author>
 
+    <!-- hook -->
+    <hook type="before_run" src="hooks/before_android_build.js" />
+    <hook type="before_build" src="hooks/before_android_build.js" />
+
+    <!-- 入口文件 -->
+    <content src="/launch.html" />
+
     <!-- 允源域 -->
     <access origin="https://*.one-ccs.duckdns.org" />
-    <preference name="Scheme" value="http"/>
-    <preference name="Scheme" value="https"/>
 
     <!-- 允许打开的外部链接 -->
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
 
-    <!-- 入口文件 -->
-    <content src="/launch.html" />
-
-    <!-- hook -->
-    <hook type="before_run" src="hooks/before_android_build.js" />
-    <hook type="before_build" src="hooks/before_android_build.js" />
+    <!-- 文件存储位置 -->
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
 
     <platform name="android">
+        <!-- 文件权限 -->
+        <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+
         <!-- 图标 -->
         <icon src="res/android/logo.png" density="ldpi" />
         <icon src="res/android/logo.png" density="mdpi" />
@@ -31,19 +36,14 @@
         <icon src="res/android/logo.png" density="xxxhdpi" />
 
         <!-- 启动屏 -->
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-ldpi" />
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-mdpi" />
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-hdpi" />
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-xhdpi" />
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-xxhdpi" />
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.png" density="land-xxxhdpi" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/android/splash.xml" />
 
         <preference name="StatusBarOverlaysWebView" value="false" />
 
         <preference name="AutoHideSplashScreen" value="true" />
         <preference name="FadeSplashScreen" value="true" />
-        <preference name="SplashScreenDelay" value="1500" />
+        <preference name="SplashScreenDelay" value="2000" />
         <preference name="SplashScreenBackgroundColor" value="#252526" />
-        <preference name="SplashMaintainAspectRatio" value="true" />
+        <preference name="SplashMaintainAspectRatio" value="false" />
     </platform>
 </widget>

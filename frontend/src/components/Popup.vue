@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const globalStore = useGlobalStore();
+const settingStore = useSettingStore();
 const shown = defineModel('shown', { default: false, required: true });
 const title = defineModel('title', { default: '' });
 const {
@@ -20,8 +20,8 @@ const {
 <template>
     <van-popup
         v-model:show="shown"
-        :safe-area-inset-top="globalStore.safeAreaInsetTop"
-        :safe-area-inset-bottom="globalStore.safeAreaInsetBottom"
+        :safe-area-inset-top="settingStore.safeAreaInsetTop"
+        :safe-area-inset-bottom="settingStore.safeAreaInsetBottom"
         :overlay="overlay"
         :style="{ width, height }"
         :duration="duration"

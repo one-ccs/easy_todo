@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { showConfirmDialog } from 'vant';
 import SlideRouterView from '@/components/SlideRouterView.vue';
 import PickerCell, { type PickerData } from '@/components/PickerCell.vue';
 import SwitchCell from '@/components/SwitchCell.vue';
-import { showConfirmDialog } from 'vant';
 
 const router = useRouter();
 const globalStore = useGlobalStore();
@@ -45,15 +45,15 @@ const onClearStorage = () => {
                     @confirm="onThemeChange"
                 />
                 <switch-cell
-                    v-model="globalStore.safeNavBarInsetTop"
+                    v-model="settingStore.safeNavBarInsetTop"
                     title="顶部状态栏适配"
                 />
                 <switch-cell
-                    v-model="globalStore.safeAreaInsetTop"
+                    v-model="settingStore.safeAreaInsetTop"
                     title="顶部安全区适配"
                 />
                 <switch-cell
-                    v-model="globalStore.safeAreaInsetBottom"
+                    v-model="settingStore.safeAreaInsetBottom"
                     title="底部安全区适配"
                 />
             </van-cell-group>

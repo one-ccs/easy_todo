@@ -61,7 +61,7 @@ declare global {
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
   const storeToRefs: typeof import('pinia')['storeToRefs']
-  const themes: typeof import('./stores/setting')['themes']
+  const themes: typeof import('../stores/setting')['themes']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -71,16 +71,16 @@ declare global {
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
-  const useGlobalStore: typeof import('./stores/global')['useGlobalStore']
+  const useGlobalStore: typeof import('../stores/global')['useGlobalStore']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']
   const useModel: typeof import('vue')['useModel']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
-  const useSettingStore: typeof import('./stores/setting')['useSettingStore']
+  const useSettingStore: typeof import('../stores/setting')['useSettingStore']
   const useSlots: typeof import('vue')['useSlots']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
-  const useTodoStore: typeof import('./stores/todo')['useTodoStore']
+  const useTodoStore: typeof import('../stores/todo')['useTodoStore']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -92,11 +92,11 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Theme } from './stores/setting'
-  import('./stores/setting')
+  export type { Theme } from '../stores/setting'
+  import('../stores/setting')
   // @ts-ignore
-  export type { Todo, TodoGroup, TodoGroups } from './stores/todo'
-  import('./stores/todo')
+  export type { Todo, TodoGroup, TodoGroups } from '../stores/todo'
+  import('../stores/todo')
 }
 
 // for vue template auto import
@@ -159,7 +159,7 @@ declare module 'vue' {
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
-    readonly themes: UnwrapRef<typeof import('./stores/setting')['themes']>
+    readonly themes: UnwrapRef<typeof import('../stores/setting')['themes']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -169,16 +169,16 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
-    readonly useGlobalStore: UnwrapRef<typeof import('./stores/global')['useGlobalStore']>
+    readonly useGlobalStore: UnwrapRef<typeof import('../stores/global')['useGlobalStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
-    readonly useSettingStore: UnwrapRef<typeof import('./stores/setting')['useSettingStore']>
+    readonly useSettingStore: UnwrapRef<typeof import('../stores/setting')['useSettingStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
-    readonly useTodoStore: UnwrapRef<typeof import('./stores/todo')['useTodoStore']>
+    readonly useTodoStore: UnwrapRef<typeof import('../stores/todo')['useTodoStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

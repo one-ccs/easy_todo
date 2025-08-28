@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const globalStore = useGlobalStore();
+const settingStore = useSettingStore();
 const active = ref('todo');
 const config = [
     {
@@ -26,7 +26,7 @@ const config = [
 <template>
     <van-tabbar
         v-model="active"
-        :safe-area-inset-bottom="globalStore.safeAreaInsetBottom"
+        :safe-area-inset-bottom="settingStore.safeAreaInsetBottom"
         route
         placeholder
     >
