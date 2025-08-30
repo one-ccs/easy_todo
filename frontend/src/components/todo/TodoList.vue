@@ -39,6 +39,7 @@ const onCheckBoxClick = (todo: Todo) => {
                                 rows="1"
                                 autosize
                                 autocomplete="off"
+                                :maxlength="globalStore.todo.maxLength"
                             />
                         </template>
                     </van-cell>

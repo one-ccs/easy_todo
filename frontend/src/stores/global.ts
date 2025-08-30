@@ -152,16 +152,28 @@ export const useGlobalStore = defineStore('global', {
             return this.update.updating;
         },
         uninstallUpdate() {
-            uninstallUpdate([
-                '/.vite',
-                '/assets',
-                '/index.html',
-                '/launch.html',
-                '/favicon.ico',
-            ]).then(() => {
-                console.log('[卸载更新成功] 返回启动页');
-                window.location.replace('/launch.html');
-            });
+            showConfirmDialog({
+                title: '提示',
+                message: '确定要卸载当前版本吗？',
+                confirmButtonText: '确定',
+                confirmButtonColor: '#f56c6c',
+                cancelButtonText: '取消',
+            })
+                .then(() => {
+                    this.update.text = '卸载中...';
+
+                    uninstallUpdate([
+                        '/.vite',
+                        '/assets',
+                        '/index.html',
+                        '/launch.html',
+                        '/favicon.ico',
+                    ]).then(() => {
+                        console.log('[卸载更新成功] 返回启动页');
+                        window.location.replace('/launch.html');
+                    });
+                })
+                .catch(() => {});
         },
     },
 });

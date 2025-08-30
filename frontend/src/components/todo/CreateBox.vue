@@ -80,11 +80,13 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
         :show="globalStore.todo.overlyShown"
         :safe-area-inset-top="settingStore.safeAreaInsetTop"
         :safe-area-inset-bottom="settingStore.safeAreaInsetBottom"
+        :duration="0.3"
         @close="saveTodo"
         position="top"
         z-index="1"
     >
         <div ref="popupRef" class="create-todo" @click="focusLatestField">
+            <div class="wrapper"></div>
             <div class="title">新建</div>
 
             <div class="content">
@@ -106,7 +108,6 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
                             :id="`createTodoField_${index}`"
                             v-model="todo.text"
                             type="textarea"
-                            autofocus
                             rows="1"
                             autosize
                             autocomplete="off"
@@ -125,11 +126,7 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
 
 <style lang="less" scoped>
 .van-overlay {
-    background: linear-gradient(
-        to bottom,
-        var(--et-bgc) calc(64px * 3 + 18%),
-        var(--et-overlay-bgc) calc(64px * 3 + 22%)
-    );
+    background: var(--et-overlay-bgc);
     backdrop-filter: blur(1px);
 }
 .van-popup {
@@ -149,6 +146,16 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
     border: 0.2em solid var(--et-color);
     height: calc(64px * 3 + 4em);
 
+    .wrapper {
+        z-index: -1;
+        position: absolute;
+        top: -2.2em;
+        left: -2.2em;
+        height: calc(100% + 2.2em * 2);
+        width: calc(100% + 2.2em * 2);
+        background: linear-gradient(to bottom, var(--et-bgc) 90%, var(--et-overlay-bgc));
+    }
+
     .title {
         position: absolute;
         top: -1em;
@@ -160,6 +167,7 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
     }
 
     .content {
+        position: relative;
         padding-top: 2%;
         height: 80%;
         overflow-x: hidden;
