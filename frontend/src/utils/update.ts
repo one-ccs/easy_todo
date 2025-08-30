@@ -1,11 +1,11 @@
 import type { Manifest } from '@/types/public';
-import { fetchTimeout } from './requests';
+import { fetchTimeout } from './public/requests';
 import {
     mkdirRecursive,
     requestFileSystem,
     resolveLocalFileSystemURL,
     writeFiles,
-} from './fileSystem';
+} from './public/fileSystem';
 
 async function checkUpdate(url: string | string[], timeout: number): Promise<Manifest> {
     if (typeof url === 'string') {

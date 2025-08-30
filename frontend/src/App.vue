@@ -37,6 +37,7 @@ const getNavBar = (path: string): Component => {
         </router-view>
 
         <van-overlay
+            class-name="global-overlay"
             @click="globalStore.overlay.loading.show = false"
             v-bind="globalStore.overlay.loading"
         >
@@ -48,7 +49,7 @@ const getNavBar = (path: string): Component => {
 </template>
 
 <style lang="less" scoped>
-:deep(.van-overlay) {
+.global-overlay {
     display: flex;
     color: v-bind('globalStore.overlay.loading.color');
     background: v-bind('globalStore.overlay.loading.background');

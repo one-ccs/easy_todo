@@ -2,6 +2,7 @@ import { onUnmounted, onDeactivated } from 'vue';
 import { onMountedOrActivated } from './onMountedOrActivated';
 
 export const enum EventNames {
+    ROUTER_BEFORE_EACH = 'ROUTER:BEFORE_EACH',
     PINIA_CHANGE = 'PINIA:CHANGE',
     API_UN_AUTH = 'API:UN_AUTH',
     API_INVALID = 'API:INVALID',

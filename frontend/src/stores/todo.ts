@@ -77,7 +77,11 @@ export const useTodoStore = defineStore('todo', {
 
             return this;
         },
-        addTodo(text: string | Todo, groupId?: string) {
+        addTodo(text: string | Todo | string[] | Todo[], groupId?: string) {
+            if (Array.isArray(text)) {
+                text.forEach((t) => this.addTodo(t, groupId));
+                return this;
+            }
             if (typeof text === 'string') {
                 this.groups[groupId ?? this.currentGroupId].todoList.unshift({
                     id: guid(),

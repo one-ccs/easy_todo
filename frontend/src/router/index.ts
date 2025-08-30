@@ -7,6 +7,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
+    eventEmitter.emit(EventNames.ROUTER_BEFORE_EACH, to, from);
+
     // 补全 history 防止返回时跳转过多
     const from_parts = from.path.split('/').filter(Boolean);
 

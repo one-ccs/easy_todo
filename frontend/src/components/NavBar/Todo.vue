@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import NavBar from '../NavBar.vue';
+
+const globalStore = useGlobalStore();
 </script>
 
 <template>
@@ -24,7 +26,13 @@ import NavBar from '../NavBar.vue';
                     hairline
                     round
                 />
-                <van-button @click="" class="nav-button" icon="plus" hairline round />
+                <van-button
+                    @click="globalStore.todo.overlyShown = true"
+                    class="nav-button"
+                    icon="plus"
+                    hairline
+                    round
+                />
             </div>
         </template>
     </nav-bar>
