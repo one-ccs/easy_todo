@@ -1,6 +1,4 @@
 <script setup lang="ts" generic="T extends ButtonStatus">
-import { useLoops } from '@/utils/use';
-
 export type ButtonStatus = {
     label?: string;
     value?: any;

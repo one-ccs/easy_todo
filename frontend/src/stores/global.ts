@@ -1,12 +1,16 @@
 import { showConfirmDialog, type CellSize, type ConfigProviderThemeVars } from 'vant';
 import type { Manifest } from '@/types/public';
 import { checkUpdate, downloadUpdate, uninstallUpdate, unzip } from '@/utils/update';
-import { compareVersion } from '@/utils/version';
+import { compareVersion } from '@/utils/public/version';
 
 export const useGlobalStore = defineStore('global', {
     state: () => ({
         __unstorage: true,
+        homePath: '/todo',
+        cellSize: <CellSize>'normal',
+        switchSize: '1.5em',
         visibilityLog: <string[]>[],
+
         update: {
             url: ['https://cdn.one-ccs.duckdns.org/app/easy-todo/manifest.json'],
             timeout: 15000,
@@ -21,10 +25,6 @@ export const useGlobalStore = defineStore('global', {
             manifest: <Manifest | null>null,
             zip: <JSZip | null>null,
         },
-
-        homePath: '/todo',
-        cellSize: <CellSize>'normal',
-        switchSize: '1.5em',
         vanThemeVars: <ConfigProviderThemeVars>{
             navBarHeight: '56px',
         },
@@ -36,6 +36,11 @@ export const useGlobalStore = defineStore('global', {
                 color: 'var(--et-color)',
                 background: 'var(--et-bgc)',
             },
+        },
+        todo: {
+            singleMax: 3 /* 单次最大添加待办数量 */,
+            maxLength: 255 /* 待办内容最大长度 */,
+            overlyShown: false,
         },
     }),
     getters: {

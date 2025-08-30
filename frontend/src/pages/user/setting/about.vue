@@ -111,7 +111,7 @@ const onCheckUpdate = () => {
     }
     .actions {
         margin-top: 2em;
-        width: 80%;
+        width: calc(100% - var(--et-space) * 2);
 
         :deep(.check-version) {
             .van-cell__title {
