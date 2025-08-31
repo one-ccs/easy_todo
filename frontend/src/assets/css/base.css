@@ -12,13 +12,19 @@
 }
 
 :root {
+    --van-cell-vertical-padding: 8px;
+
+    --et-radius: 5px;
+    --et-radius-lg: 9px;
+    --et-space: var(--et-nav-bar-space);
+    --et-space-lg: calc(var(--et-space) * 1.5);
+    --et-sub-color: #707070;
+
     --et-nav-bar-padding: 0 var(--van-padding-md);
     --et-nav-bar-height: var(--van-nav-bar-height);
     --et-nav-bar-icon-size: 2em;
-    --et-nav-bar-icon-radius: 5px;
+    --et-nav-bar-icon-radius: var(--et-radius);
     --et-nav-bar-space: 12px;
-    --et-space: var(--et-nav-bar-space);
-    --et-sub-color: #707070;
 }
 
 ::view-transition-old(root),

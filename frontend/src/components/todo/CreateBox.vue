@@ -1,26 +1,30 @@
 <script setup lang="ts">
 import { showNotify } from 'vant';
-import type { Todo } from '@/stores/todo';
-import { guid } from '@/utils/utils';
+import LevelRadio from './LevelRadio.vue';
 
 const globalStore = useGlobalStore();
 const settingStore = useSettingStore();
 const todoStore = useTodoStore();
-const popupRef = ref();
-const todos = ref<Partial<Pick<Todo, 'id' | 'done' | 'text'>>[]>([{}]);
+const level = ref(3);
+const todos = ref<Todo[]>([{ text: '', done: false, level: level.value }]);
 const nullCount = <{ [key: string]: number }>{};
 
-const focusLatestField = () => {
+const focusLatestField = (index?: number) => {
     nextTick(() => {
-        const newIndex = todos.value.length - 1;
+        const newIndex = index ?? todos.value.length - 1;
         const newField = document.getElementById(
             `createTodoField_${newIndex}`
         ) as HTMLTextAreaElement;
         newField.focus();
+        newField.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
 };
-const onEnterClick = () => {
-    if (!todos.value[todos.value.length - 1]?.text?.trim()) {
+const onEnterClick = (index: number) => {
+    if (!todos.value[index].text.trim()) {
+        return;
+    }
+    if (index < todos.value.length - 1) {
+        focusLatestField(index + 1);
         return;
     }
     if (todos.value.length >= globalStore.todo.singleMax) {
@@ -31,19 +35,15 @@ const onEnterClick = () => {
         });
         return;
     }
-    todos.value.push({ id: guid(), text: '', done: false });
+    todos.value.push({ text: '', done: false, level: level.value });
     focusLatestField();
 };
-const onDeleteClick = () => {
-    if (todos.value.length === 1) {
+const onDeleteClick = (index: number) => {
+    if (todos.value.length === 1 || todos.value[index].text) {
         return;
     }
-    const index = todos.value.length - 1;
     const key = `createTodoField_${index}`;
 
-    if (todos.value[index].text) {
-        return;
-    }
     nullCount[key] ? nullCount[key]++ : (nullCount[key] = 1);
 
     if (nullCount[key] >= 2) {
@@ -56,9 +56,10 @@ const onDeleteClick = () => {
 const saveTodo = () => {
     globalStore.todo.overlyShown = false;
     todoStore.addTodo(
-        todos.value.filter((todo) => !!todo.text).map((todo) => todo.text!)
+        todos.value.map((todo) => ({ ...todo, level: level.value })).reverse(),
+        0
     );
-    todos.value = [{}];
+    todos.value = [{ text: '', done: false, level: level.value }];
     for (const key in nullCount) {
         nullCount[key] = 0;
     }
@@ -85,7 +86,7 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
         position="top"
         z-index="1"
     >
-        <div ref="popupRef" class="create-todo" @click="focusLatestField">
+        <div class="create-todo" @mousedown.prevent>
             <div class="wrapper"></div>
             <div class="title">新建</div>
 
@@ -97,29 +98,39 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
                 >
                     <template #icon>
                         <van-icon
+                            class="check-icon"
                             :class="{ null: !todo.text }"
                             class-prefix="fa"
                             name="circle-o"
                             size="1.2em"
+                            :color="todoStore.levels[level].color"
                         />
                     </template>
                     <template #title>
                         <van-field
+                            class="field"
                             :id="`createTodoField_${index}`"
                             v-model="todo.text"
                             type="textarea"
                             rows="1"
                             autosize
                             autocomplete="off"
+                            :show-word-limit="
+                                todo.text.length >= globalStore.todo.maxLength * 0.9
+                            "
                             :maxlength="globalStore.todo.maxLength"
-                            @keypress.enter.prevent="onEnterClick"
-                            @keyup.delete.prevent="onDeleteClick"
+                            @click="focusLatestField(index)"
+                            @keypress.enter.prevent="onEnterClick(index)"
+                            @keyup.delete.prevent="onDeleteClick(index)"
                         />
                     </template>
                 </van-cell>
             </div>
 
-            <van-button @click="saveTodo" class="done">完成</van-button>
+            <div class="footer">
+                <level-radio v-model="level" />
+                <div class="done van-haptics-feedback" @click="saveTodo">完成</div>
+            </div>
         </div>
     </van-popup>
 </template>
@@ -133,69 +144,89 @@ eventEmitter.withAlive(EventNames.ROUTER_BEFORE_EACH, () => {
     background: transparent;
 
     .create-todo {
-        .van-cell {
-            background: transparent;
-            padding-top: 0.5em;
-            padding-bottom: 0.5em;
-        }
-    }
-}
-.create-todo {
-    position: relative;
-    margin: 2em;
-    border: 0.2em solid var(--et-color);
-    height: calc(64px * 3 + 4em);
-
-    .wrapper {
-        z-index: -1;
-        position: absolute;
-        top: -2.2em;
-        left: -2.2em;
-        height: calc(100% + 2.2em * 2);
-        width: calc(100% + 2.2em * 2);
-        background: linear-gradient(to bottom, var(--et-bgc) 90%, var(--et-overlay-bgc));
-    }
-
-    .title {
-        position: absolute;
-        top: -1em;
-        left: 0.5em;
-        padding: 0 0.5em;
-        font-size: 1.2em;
-        color: #ff6a71;
-        background: var(--et-bgc);
-    }
-
-    .content {
         position: relative;
-        padding-top: 2%;
-        height: 80%;
-        overflow-x: hidden;
-        overflow-y: auto;
+        margin: 2em;
+        border: 0.2em solid var(--et-color);
 
-        .null {
-            opacity: 0.3;
-        }
-    }
-
-    .done {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        margin-right: var(--et-space);
-        border: none;
-        background: transparent;
-
-        &::after {
+        .wrapper {
+            z-index: -1;
             position: absolute;
-            top: 80%;
-            left: 20%;
-            content: '';
-            display: block;
-            border-radius: 3px;
-            width: 2.5em;
-            height: 3.8px;
-            background-color: #f6ce49;
+            top: -2.2em;
+            left: -2.2em;
+            height: calc(100% + 2.2em * 2);
+            width: calc(100% + 2.2em * 2);
+            background: linear-gradient(
+                to bottom,
+                var(--et-bgc) 90%,
+                var(--et-overlay-bgc),
+                transparent
+            );
+        }
+        .title {
+            position: absolute;
+            top: -1em;
+            left: 0.5em;
+            padding: 0 0.5em;
+            font-size: 1.2em;
+            color: #ff6a71;
+            background: var(--et-bgc);
+        }
+        .content {
+            position: relative;
+            margin-top: 5%;
+            height: calc(64px * 3 + 2em);
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .van-cell {
+                background: transparent;
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+            }
+            .check-icon {
+                filter: drop-shadow(var(--et-drop-shadow));
+                transition: opacity 0.3s;
+
+                &::after {
+                    content: '';
+                    background: var(--et-bgc);
+                    border-radius: 50%;
+                    width: 0.6em;
+                    height: 0.6em;
+                    position: absolute;
+                    inset: 0;
+                    top: 0.21em;
+                    left: 0.138em;
+                }
+                &.null {
+                    opacity: 0.3;
+                }
+            }
+        }
+        .footer {
+            display: flex;
+            align-items: center;
+
+            .level {
+                margin-left: var(--et-space);
+            }
+            .done {
+                position: relative;
+                margin: 0 var(--et-space) 0 auto;
+                padding: var(--et-space);
+
+                &::after {
+                    position: absolute;
+                    top: 80%;
+                    left: 15%;
+                    content: '';
+                    display: block;
+                    border-radius: 3px;
+                    width: 2.5em;
+                    height: 3.8px;
+                    background-color: #f6ce49;
+                }
+            }
         }
     }
 }

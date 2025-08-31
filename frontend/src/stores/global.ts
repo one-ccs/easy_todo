@@ -39,7 +39,7 @@ export const useGlobalStore = defineStore('global', {
         },
         todo: {
             singleMax: 3 /* 单次最大添加待办数量 */,
-            maxLength: 255 /* 待办内容最大长度 */,
+            maxLength: 198 /* 待办内容最大长度 */,
             overlyShown: false,
         },
     }),

@@ -1,128 +1,88 @@
-import { guid } from '@/utils/utils';
-
+export enum TodoUI {
+    QUADRANT = 'Quadrant',
+    WATERFALL = 'Waterfall',
+}
+export type TodoLevel = {
+    level: number;
+    color: string;
+    background: string;
+};
 export type Todo = {
-    id: string;
     text: string;
     done: boolean;
+    level: number;
 };
-export type TodoGroup = {
-    id: string;
-    title: string;
-    position: number;
-    todoList: Todo[];
-    doneList: Todo[];
-};
-export type TodoGroups = {
-    [key: string]: TodoGroup;
-};
-
-const _guid = guid();
 
 export const useTodoStore = defineStore('todo', {
     state: () => ({
-        currentGroupId: _guid,
-        groups: <TodoGroups>{
-            [_guid]: {
-                id: _guid,
-                title: '待办事项',
-                position: 0,
-                todoList: <Todo[]>[
-                    {
-                        id: '1',
-                        text: '完善待办页面',
-                        done: false,
-                    },
-                    {
-                        id: '2',
-                        text: '完善用户页面',
-                        done: false,
-                    },
-                ],
-                doneList: <Todo[]>[
-                    {
-                        id: '3',
-                        text: '完善管理员页面',
-                        done: true,
-                    },
-                ],
+        ui: <TodoUI>TodoUI.WATERFALL,
+        levels: <{ [level: number]: TodoLevel }>{
+            1: {
+                level: 1,
+                color: '#d9effa',
+                background: '#c1d5e0',
+            },
+            2: {
+                level: 2,
+                color: '#e0f5e6',
+                background: '#c4dbcb',
+            },
+            3: {
+                level: 3,
+                color: '#fcf3b2',
+                background: '#e3daa1',
+            },
+            4: {
+                level: 4,
+                color: '#f7d794',
+                background: '#e1c27e',
             },
         },
+        todos: <Todo[]>[
+            {
+                text: '完善待办页面',
+                done: false,
+                level: 1,
+            },
+            {
+                text: '完善用户页面',
+                done: false,
+                level: 2,
+            },
+            {
+                text: '完善管理员页面',
+                done: true,
+                level: 3,
+            },
+            {
+                text: '完善管理员页面',
+                done: true,
+                level: 4,
+            },
+        ],
     }),
-    getters: {
-        sortedGroupInfo: (state) =>
-            Object.values(state.groups)
-                .sort((a, b) => a.position - b.position)
-                .map((group) => ({
-                    id: group.id,
-                    title: group.title,
-                    position: group.position,
-                })),
-        currentGroup: (state) => state.groups[state.currentGroupId],
-    },
+    getters: {},
     actions: {
-        addGroup(title: string, position: number) {
-            const id = guid();
-            this.groups[id] = {
-                id,
-                title,
-                position,
-                todoList: [],
-                doneList: [],
-            };
-
-            return this;
-        },
-        removeGroup(id: string) {
-            delete this.groups[id];
-
-            return this;
-        },
-        addTodo(text: string | Todo | string[] | Todo[], groupId?: string) {
-            if (Array.isArray(text)) {
-                text.forEach((t) => this.addTodo(t, groupId));
-                return this;
+        addTodo(todo: string | Todo | string[] | Todo[], position?: number) {
+            if (Array.isArray(todo)) {
+                todo.forEach((t) => this.addTodo(t, position));
+                return;
             }
-            if (typeof text === 'string') {
-                this.groups[groupId ?? this.currentGroupId].todoList.unshift({
-                    id: guid(),
-                    text,
-                    done: false,
-                });
+            if (typeof todo === 'object' && todo.text.trim()) {
+                position = position ?? this.todos.length;
+                this.todos.splice(position, 0, todo);
             }
-            if (typeof text === 'object') {
-                const group = this.groups[groupId ?? this.currentGroupId];
-
-                group.todoList.push(text);
+            if (typeof todo === 'string' && todo.trim()) {
+                position = position ?? this.todos.length;
+                this.todos.splice(position, 0, { text: todo, done: false, level: 0 });
             }
-
-            return this;
         },
-        removeTodo(todo: Todo, groupId?: string) {
-            const group = this.groups[groupId ?? this.currentGroupId];
-            const index = group.todoList.indexOf(todo);
+        removeTodo(todo: Todo) {
+            const index = this.todos.indexOf(todo);
 
             if (index !== -1) {
-                group.todoList.splice(index, 1);
+                this.todos.splice(index, 1);
             }
-
-            return this;
-        },
-        addDone(todo: Todo, groupId?: string) {
-            const group = this.groups[groupId ?? this.currentGroupId];
-
-            group.doneList.unshift(todo);
-
-            return this;
-        },
-        removeDone(todo: Todo, groupId?: string) {
-            const group = this.groups[groupId ?? this.currentGroupId];
-            const index = group.doneList.indexOf(todo);
-
-            if (index !== -1) {
-                group.doneList.splice(index, 1);
-            }
-
-            return this;
         },
     },
 });

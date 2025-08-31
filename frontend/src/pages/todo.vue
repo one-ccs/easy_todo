@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import SlideRouterView from '@/components/SlideRouterView.vue';
 import CreateBox from '@/components/todo/CreateBox.vue';
-import TodoList from '@/components/todo/TodoList.vue';
-import DoneList from '@/components/todo/DoneList.vue';
+import Waterfall from '@/components/todo/ui/Waterfall.vue';
+import Quadrant from '@/components/todo/ui/Quadrant.vue';
 
-const globalStore = useGlobalStore();
+const UIComponents = {
+    Waterfall,
+    Quadrant,
+};
+const todoStore = useTodoStore();
 </script>
 
 <template>
@@ -13,15 +17,8 @@ const globalStore = useGlobalStore();
 
         <create-box />
 
-        <div
-            class="todo-list"
-            :class="{ 'add-overly-shown': globalStore.todo.overlyShown }"
-        >
-            <todo-list />
-
-            <div class="van-hairline--top"></div>
-
-            <done-list />
+        <div class="todos">
+            <component :is="UIComponents[todoStore.ui]" />
         </div>
     </div>
 </template>
@@ -31,20 +28,10 @@ const globalStore = useGlobalStore();
     overflow-x: hidden;
     overflow-y: auto;
 
-    .todo-list {
-        transition: margin-top 0.3s ease-in-out;
-
-        &.add-overly-shown {
-            margin-top: calc(64px * 3 + 4em);
-        }
-        .van-hairline--top {
-            margin: 0 var(--et-space);
-            height: 1px;
-
-            &::after {
-                border-color: var(--et-border-color);
-            }
-        }
+    .todos {
+        margin: var(--et-space);
+        border-radius: var(--et-radius);
+        overflow: hidden;
     }
 }
 </style>

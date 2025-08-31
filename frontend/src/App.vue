@@ -28,10 +28,10 @@ const getNavBar = (path: string): Component => {
     >
         <router-view v-slot="{ Component, route }">
             <keep-alive>
-                <component :is="getNavBar(route.path)"></component>
+                <component :is="getNavBar(route.path)" />
             </keep-alive>
             <keep-alive>
-                <component :is="Component"></component>
+                <component :is="Component" />
             </keep-alive>
             <tabbar />
         </router-view>
@@ -48,14 +48,41 @@ const getNavBar = (path: string): Component => {
     </van-config-provider>
 </template>
 
-<style lang="less" scoped>
-.global-overlay {
+<style lang="less">
+.van-config-provider {
     display: flex;
-    color: v-bind('globalStore.overlay.loading.color');
-    background: v-bind('globalStore.overlay.loading.background');
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 
-    .overlay-wrapper {
-        margin: auto;
+    .client-view {
+        width: 100%;
+        height: 100%;
+    }
+    .full-view {
+        z-index: 2;
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        color: var(--et-color);
+        background-color: var(--et-bgc);
+
+        .view-container {
+            overflow: hidden auto;
+        }
+    }
+    .global-overlay {
+        display: flex;
+        color: v-bind('globalStore.overlay.loading.color');
+        background: v-bind('globalStore.overlay.loading.background');
+
+        .overlay-wrapper {
+            margin: auto;
+        }
     }
 }
 </style>

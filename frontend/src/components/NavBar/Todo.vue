@@ -2,18 +2,22 @@
 import NavBar from '../NavBar.vue';
 
 const globalStore = useGlobalStore();
+const todoStore = useTodoStore();
 </script>
 
 <template>
     <nav-bar>
         <template #left>
-            <div class="left">
+            <div class="left van-haptics-feedback">
                 <div class="icon">
                     <van-icon name="todo-list" />
                 </div>
                 <div class="content">
-                    <div class="title">待办</div>
-                    <div class="desc">25条待办</div>
+                    <div class="title">
+                        <span>待办</span>
+                        <van-icon name="play" style="color: unset" />
+                    </div>
+                    <div class="desc">{{ todoStore.todos.length }}条待办</div>
                 </div>
             </div>
         </template>

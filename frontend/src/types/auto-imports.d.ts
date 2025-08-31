@@ -8,6 +8,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const EventNames: typeof import('../utils/public/eventEmitter')['EventNames']
+  const TodoUI: typeof import('../stores/todo')['TodoUI']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const compareVersion: typeof import('../utils/public/version')['compareVersion']
   const computed: typeof import('vue')['computed']
@@ -110,7 +111,7 @@ declare global {
   export type { Theme } from '../stores/setting'
   import('../stores/setting')
   // @ts-ignore
-  export type { Todo, TodoGroup, TodoGroups } from '../stores/todo'
+  export type { TodoUI, TodoLevel, Todo } from '../stores/todo'
   import('../stores/todo')
 }
 
@@ -121,6 +122,7 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly EventNames: UnwrapRef<typeof import('../utils/public/eventEmitter')['EventNames']>
+    readonly TodoUI: UnwrapRef<typeof import('../stores/todo')['TodoUI']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly compareVersion: UnwrapRef<typeof import('../utils/public/version')['compareVersion']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

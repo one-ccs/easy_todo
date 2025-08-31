@@ -5,7 +5,7 @@ import NavBar from '../NavBar.vue';
 <template>
     <nav-bar>
         <template #left>
-            <div class="left">
+            <div class="left van-haptics-feedback">
                 <div class="icon">
                     <van-icon name="notes" />
                 </div>
